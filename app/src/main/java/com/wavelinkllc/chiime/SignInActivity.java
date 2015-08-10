@@ -1,22 +1,15 @@
 package com.wavelinkllc.chiime;
 
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
+import android.view.View;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.JsonObject;
-import com.koushikdutta.ion.Ion;
-import com.koushikdutta.async.future.FutureCallback;
 
 public class SignInActivity extends FragmentActivity implements SignInDialogFragment.SignInDialogListener {
 
@@ -26,7 +19,8 @@ public class SignInActivity extends FragmentActivity implements SignInDialogFrag
         setContentView(R.layout.activity_sign_in);
 
         if (User.attemptToloadUser(getApplicationContext())) {
-            Toast.makeText(getApplicationContext(), "Logged in as " + User.username, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Not logged in", Toast.LENGTH_SHORT).show();
         }

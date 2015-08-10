@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.google.gson.JsonObject;
-import com.google.gson.annotations.SerializedName;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
@@ -20,9 +19,10 @@ public class User {
 
     private static final String LOGIN_URL = "http://www.chiime.co/services/login/chiime_android.php";
     private static final String PREFERENCE_NAME = "Chiime";
-    private static final String USER_ID_SESSION_KEY = "userId";
-    private static final String USERNAME_SESSION_KEY = "username";
-    private static final String PASSWORD_SESSION_KEY = "password";
+    private static final String USER_ID_KEY = "userId";
+    private static final String USERNAME_KEY = "username";
+    private static final String PASSWORD_KEY = "password";
+    private static final String AUTHENTICATED_KEY = "authenticated";
 
     public static String userId;
     public static String username;
@@ -34,9 +34,9 @@ public class User {
 
     public static boolean attemptToloadUser(Context context){
         SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, 0);
-        userId = preferences.getString(USER_ID_SESSION_KEY, null);
-        username = preferences.getString(USERNAME_SESSION_KEY, null);
-        password = preferences.getString(PASSWORD_SESSION_KEY, null);
+        userId = preferences.getString(USER_ID_KEY, null);
+        username = preferences.getString(USERNAME_KEY, null);
+        password = preferences.getString(PASSWORD_KEY, null);
         return null != userId;
     }
 
@@ -45,8 +45,8 @@ public class User {
         editor = preferences.edit();
         Ion.with(context)
             .load(LOGIN_URL)
-            .setBodyParameter("username", usernameCredential)
-            .setBodyParameter("password", passwordCredential)
+            .setBodyParameter(USERNAME_KEY, usernameCredential)
+            .setBodyParameter(PASSWORD_KEY, passwordCredential)
             .asJsonObject()
             .setCallback(new FutureCallback<JsonObject>() {
                 @Override
@@ -54,14 +54,14 @@ public class User {
                     boolean isAuthenticated = false;
                     boolean isNetworkError = false;
                     if (null == e) {
-                        if (result.get("authenticated").getAsBoolean()) {
-                            userId = result.get("userId").getAsString();
-                            username = result.get("username").getAsString();
+                        if (result.get(AUTHENTICATED_KEY).getAsBoolean()) {
+                            userId = result.get(USER_ID_KEY).getAsString();
+                            username = result.get(USERNAME_KEY).getAsString();
                             password = passwordCredential;
 
-                            editor.putString(USER_ID_SESSION_KEY, userId);
-                            editor.putString(USERNAME_SESSION_KEY, username);
-                            editor.putString(PASSWORD_SESSION_KEY, password);
+                            editor.putString(USER_ID_KEY, userId);
+                            editor.putString(USERNAME_KEY, username);
+                            editor.putString(PASSWORD_KEY, password);
                             editor.apply();
 
                             isAuthenticated = true;
