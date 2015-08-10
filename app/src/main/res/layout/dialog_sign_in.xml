@@ -1,0 +1,52 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".SignInActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp" >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/user" />
+
+        <EditText
+            android:id="@+id/username_text_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ChiimeEditText"
+            android:inputType="textVisiblePassword"
+            android:hint="Username" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="47dp" >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:scaleType="fitCenter"
+            android:src="@drawable/key" />
+
+        <EditText
+            android:id="@+id/password_text_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ChiimeEditText"
+            android:inputType="textPassword"
+            android:hint="Password" />
+
+    </TableRow>
+
+</RelativeLayout>

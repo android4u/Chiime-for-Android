@@ -1,0 +1,48 @@
+<resources>
+
+    <style name="ChiimeTheme" parent="Theme.AppCompat.Light">
+        <item name="android:actionBarStyle">@style/ChiimeActionBar</item>
+        <item name="actionBarStyle">@style/ChiimeActionBar</item>
+    </style>
+
+    <style name="ChiimeActionBar"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/chiime_orange</item>
+        <item name="background">@color/chiime_orange</item>
+        <item name="android:titleTextStyle">@style/ChiimeActionBarTitleText</item>
+        <item name="titleTextStyle">@style/ChiimeActionBarTitleText</item>
+    </style>
+
+    <style name="ChiimeActionBarTitleText"
+        parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ChiimeActionBarTabText"
+        parent="@style/Widget.AppCompat.ActionBar.TabText">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="NoTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <style name="LogoFont" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="ChiimeEditText">
+        <item name="colorControlNormal">@color/clouds</item>
+    </style>
+
+    <style name="GreenButtonStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/emerald</item>
+    </style>
+
+    <style name="WhiteButtonStyle">
+        <item name="android:textColor">@color/asbestos</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+</resources>
