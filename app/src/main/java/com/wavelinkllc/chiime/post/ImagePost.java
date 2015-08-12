@@ -20,11 +20,12 @@ public class ImagePost extends Post {
         image = (SquareImageView)view.findViewById(R.id.image);
     }
 
+    @Override
     public void render(PostItem postItem)
     {
         super.render(postItem);
         Ion.with(image)
-                .placeholder(R.drawable.user)
+                .placeholder(R.drawable.load)
                 .load("http://www.chiime.co" + postItem.image);
     }
 

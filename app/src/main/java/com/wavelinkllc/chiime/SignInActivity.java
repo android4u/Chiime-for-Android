@@ -19,10 +19,7 @@ public class SignInActivity extends FragmentActivity implements SignInDialogFrag
         setContentView(R.layout.activity_sign_in);
 
         if (User.attemptToloadUser(getApplicationContext())) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Not logged in", Toast.LENGTH_SHORT).show();
+            startHomeActivity();
         }
 
         TextView logoTextTextView = (TextView)findViewById(R.id.logo_text);
@@ -43,7 +40,7 @@ public class SignInActivity extends FragmentActivity implements SignInDialogFrag
                     public void onSignInComplete(boolean isAuthenticated, boolean isNetworkError) {
                         if (!isNetworkError) {
                             if (isAuthenticated) {
-                                Toast.makeText(getApplicationContext(), "Logged in as " + User.username, Toast.LENGTH_SHORT).show();
+                                startHomeActivity();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Could not find user. Please check your credentials and try again.", Toast.LENGTH_SHORT).show();
                             }
@@ -57,6 +54,10 @@ public class SignInActivity extends FragmentActivity implements SignInDialogFrag
 
     public void signUp(View view) {
         // Do something in response to button click
+    }
+
+    private void startHomeActivity() {
+        startActivity(new Intent(this, HomeActivity.class));
     }
 
 }

@@ -1,6 +1,7 @@
 package com.wavelinkllc.chiime;
 
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -112,6 +113,11 @@ public class HomeActivity extends AppCompatActivity {
         listView.setAdapter(postAdapter);
 
         load();
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setCustomView(R.layout.logo);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
+                | ActionBar.DISPLAY_SHOW_HOME);
     }
 
     @Override

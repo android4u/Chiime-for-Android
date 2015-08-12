@@ -12,6 +12,7 @@ public class TextPost extends Post {
         super(convertView);
     }
 
+    @Override
     public void render(PostItem postItem)
     {
         super.render(postItem);
