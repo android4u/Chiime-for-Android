@@ -4,56 +4,62 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="7dp" >
+    android:layout_marginTop="14dp"
+    android:layout_marginBottom="4dp">
 
     <ImageView
         android:id="@+id/like_image"
         android:layout_width="13dp"
         android:layout_height="13dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="4dp"
         android:scaleType="fitCenter"
         android:src="@drawable/like_dark" />
 
-    <Button
+    <TextView
         android:id="@+id/like_button"
         android:layout_width="wrap_content"
-        android:layout_height="15dp"
-        android:textSize="12sp"
+        android:layout_height="14dp"
+        android:layout_marginRight="15dp"
+        android:textSize="11sp"
         android:textColor="@color/silver"
-        android:text="LIKE"
-        android:background="?android:attr/selectableItemBackground" />
+        android:textStyle="bold"
+        android:text="LIKE" />
 
     <ImageView
         android:id="@+id/comment_image"
-        android:layout_width="13dp"
-        android:layout_height="13dp"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginRight="4dp"
         android:scaleType="fitCenter"
         android:src="@drawable/comment" />
 
-    <Button
+    <TextView
         android:id="@+id/comment_button"
         android:layout_width="wrap_content"
-        android:layout_height="13dp"
-        android:textSize="12sp"
+        android:layout_height="14dp"
+        android:layout_marginRight="15dp"
+        android:textSize="11sp"
         android:textColor="@color/silver"
-        android:text="COMMENT"
-        android:background="?android:attr/selectableItemBackground"
-        android:scaleType="fitCenter" />
+        android:textStyle="bold"
+        android:text="COMMENT" />
 
     <ImageView
         android:id="@+id/share_image"
         android:layout_width="13dp"
         android:layout_height="13dp"
+        android:layout_marginRight="4dp"
         android:scaleType="fitCenter"
         android:src="@drawable/share" />
 
-    <Button
+    <TextView
         android:id="@+id/share_button"
         android:layout_width="wrap_content"
-        android:layout_height="13dp"
-        android:textSize="12sp"
+        android:layout_height="14dp"
+        android:textSize="11sp"
         android:textColor="@color/silver"
-        android:text="SHARE"
-        android:background="?android:attr/selectableItemBackground"
-        android:scaleType="fitCenter" />
+        android:textStyle="bold"
+        android:text="SHARE" />
 
 </LinearLayout>

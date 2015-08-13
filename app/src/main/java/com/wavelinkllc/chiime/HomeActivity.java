@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -41,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     ArrayAdapter<PostItem> postAdapter;
+    boolean isLoadingMorePosts = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,6 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             @Override
-
             public View getView(int position, View convertView, ViewGroup parent) {
 
                 LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -111,13 +112,27 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ListView listView = (ListView)findViewById(R.id.list);
         listView.setAdapter(postAdapter);
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
 
-        load();
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if(totalItemCount > 0) {
+                    int lastInScreen = firstVisibleItem + visibleItemCount + 5;
+                    if (lastInScreen == totalItemCount && !isLoadingMorePosts) {
+                        loadPosts();
+                    }
+                }
+            }
+        });
+
+        loadPosts();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setCustomView(R.layout.logo);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM
-                | ActionBar.DISPLAY_SHOW_HOME);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
     }
 
     @Override
@@ -142,11 +157,18 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void load() {
+    private void loadPosts() {
+        isLoadingMorePosts = true;
+
+        String next = "0";
+        if(postAdapter.getCount() > 0) {
+            next = postAdapter.getItem(postAdapter.getCount() - 1).next.toString();
+        }
+
         Ion.with(this)
             .load("http://www.chiime.co/services/feed/main.php")
             .setBodyParameter("userId", User.userId)
-            .setBodyParameter("next", "0")
+            .setBodyParameter("next", next)
             .as(new TypeToken<List<PostItem>>() {
             })
             .setCallback(new FutureCallback<List<PostItem>>() {
@@ -159,7 +181,9 @@ public class HomeActivity extends AppCompatActivity {
                     for (int i = 0; i < result.size(); i++) {
                         postAdapter.add(result.get(i));
                     }
+                    isLoadingMorePosts = false;
                 }
             });
     }
+
 }
