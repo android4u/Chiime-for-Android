@@ -2,6 +2,7 @@ package com.wavelinkllc.chiime;
 
 import android.content.Context;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -133,6 +134,17 @@ public class HomeActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setCustomView(R.layout.logo);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.bottom_toolbar);
+        toolbar.setOnMenuItemClickListener(
+                new Toolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        // Handle the menu item
+                        return true;
+                    }
+                });
+        toolbar.inflateMenu(R.menu.menu_home_bottom);
     }
 
     @Override
