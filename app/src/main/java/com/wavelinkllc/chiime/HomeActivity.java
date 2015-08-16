@@ -2,7 +2,6 @@ package com.wavelinkllc.chiime;
 
 import android.content.Context;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.reflect.TypeToken;
@@ -22,7 +19,9 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.wavelinkllc.chiime.post.ImagePost;
 import com.wavelinkllc.chiime.post.PostItem;
+import com.wavelinkllc.chiime.post.SoapBoxPost;
 import com.wavelinkllc.chiime.post.TextPost;
+import com.wavelinkllc.chiime.post.VideoPost;
 
 import java.util.List;
 
@@ -30,7 +29,9 @@ public class HomeActivity extends AppCompatActivity {
 
     public enum PostType {
         TEXT(0),
-        IMAGE(1);
+        IMAGE(1),
+        SOAPBOX(2),
+        VIDEO(3);
 
         private final int value;
         PostType(int value) {
@@ -53,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public int getViewTypeCount() {
-                return 2;
+                return 4;
             }
 
             @Override
@@ -61,8 +62,12 @@ public class HomeActivity extends AppCompatActivity {
                 String type = postAdapter.getItem(position).type;
                 if (type.equals("text"))
                     return PostType.TEXT.getValue();
-                if (type.equals("image"))
+                if (type.equals("image") || type.equals("gif"))
                     return PostType.IMAGE.getValue();
+                if (type.equals("soapbox"))
+                    return PostType.SOAPBOX.getValue();
+                if (type.equals("video"))
+                    return PostType.VIDEO.getValue();
                 return 0;
             }
 
@@ -93,6 +98,26 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     imagePost.render(getItem(position));
                     convertView = imagePost.view;
+                } else if (type == PostType.SOAPBOX.getValue()) {
+                    SoapBoxPost soapBoxPost;
+                    if (convertView == null) {
+                        convertView = inflater.inflate(R.layout.post_soap_box, null);
+                        soapBoxPost = new SoapBoxPost(convertView);
+                    } else {
+                        soapBoxPost = (SoapBoxPost) convertView.getTag();
+                    }
+                    soapBoxPost.render(getItem(position));
+                    convertView = soapBoxPost.view;
+                } else if (type == PostType.VIDEO.getValue()) {
+                    VideoPost videoPost;
+                    if (convertView == null) {
+                        convertView = inflater.inflate(R.layout.post_video, null);
+                        videoPost = new VideoPost(convertView);
+                    } else {
+                        videoPost = (VideoPost) convertView.getTag();
+                    }
+                    videoPost.render(getItem(position));
+                    convertView = videoPost.view;
                 } else {
                     TextPost textPost;
                     if (convertView == null) {
@@ -135,16 +160,6 @@ public class HomeActivity extends AppCompatActivity {
         actionBar.setCustomView(R.layout.logo);
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.bottom_toolbar);
-        toolbar.setOnMenuItemClickListener(
-                new Toolbar.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        // Handle the menu item
-                        return true;
-                    }
-                });
-        toolbar.inflateMenu(R.menu.menu_home_bottom);
     }
 
     @Override
@@ -178,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         Ion.with(this)
-            .load("http://www.chiime.co/services/feed/main.php")
+            .load("http://www.chiime.co/services/feed/videos.php")
             .setBodyParameter("userId", User.userId)
             .setBodyParameter("next", next)
             .as(new TypeToken<List<PostItem>>() {

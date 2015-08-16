@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_bar"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_alignParentBottom="true"
+    android:gravity="center"
+    android:background="@color/clouds" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/home_tab_button"
+            style="@style/BottomBarButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/home" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/explore_tab_button"
+            style="@style/BottomBarButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/search" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/post_tab_button"
+            style="@style/BottomBarButton"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/pencil_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/inbox_tab_button"
+            style="@style/BottomBarButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/inbox_white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/me_tab_button"
+            style="@style/BottomBarButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/user" />
+    </LinearLayout>
+
+</LinearLayout>

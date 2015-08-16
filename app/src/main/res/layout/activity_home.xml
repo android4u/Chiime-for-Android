@@ -12,13 +12,6 @@
         android:divider="@null"
         android:dividerHeight="0dp" />
 
-    <android.support.v7.widget.Toolbar
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/bottom_toolbar"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:minHeight="?attr/actionBarSize"
-        android:background="@color/clouds" />
+    <include layout="@layout/bar_bottom"/>
 
 </RelativeLayout>

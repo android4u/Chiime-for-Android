@@ -4,20 +4,18 @@
 package com.wavelinkllc.chiime.post;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.ion.Ion;
 import com.wavelinkllc.chiime.R;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Post {
 
     public final View view;
     public Object tag = null;
 
-    protected CircleImageView profilePicture = null;
+    protected ImageView profilePicture = null;
     protected TextView nameLabel = null;
     protected TextView usernameLabel = null;
     protected TextView timeLabel = null;
@@ -32,7 +30,7 @@ public class Post {
     public Post(View convertView)
     {
         this.view = convertView;
-        this.profilePicture = (CircleImageView)this.view.findViewById(R.id.profile_picture);
+        this.profilePicture = (ImageView)this.view.findViewById(R.id.profile_picture);
         this.nameLabel = (TextView)this.view.findViewById(R.id.name_label);
         this.usernameLabel = (TextView)this.view.findViewById(R.id.username_label);
         this.timeLabel = (TextView)this.view.findViewById(R.id.time_label);

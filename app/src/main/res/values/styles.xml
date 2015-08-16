@@ -3,6 +3,7 @@
     <style name="ChiimeTheme" parent="Theme.AppCompat.Light">
         <item name="android:actionBarStyle">@style/ChiimeActionBar</item>
         <item name="actionBarStyle">@style/ChiimeActionBar</item>
+        <item name="android:actionOverflowButtonStyle">@style/ChiimeActionButtonOverflow</item>
     </style>
 
     <style name="ChiimeActionBar"
@@ -23,6 +24,10 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="ChiimeActionButtonOverflow" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="NoTheme" parent="Theme.AppCompat.Light.NoActionBar">
     </style>
 
@@ -35,14 +40,19 @@
         <item name="colorControlNormal">@color/clouds</item>
     </style>
 
-    <style name="GreenButtonStyle">
+    <style name="GreenButton">
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/emerald</item>
     </style>
 
-    <style name="WhiteButtonStyle">
+    <style name="WhiteButton">
         <item name="android:textColor">@color/asbestos</item>
         <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="BottomBarButton">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:tint">@color/asbestos</item>
     </style>
 
     <style name="NameLabel" parent="@android:style/TextAppearance.Medium">
