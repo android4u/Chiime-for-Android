@@ -4,36 +4,41 @@
 package com.wavelinkllc.chiime.post;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
-import android.widget.MediaController;
 
+import com.koushikdutta.ion.Ion;
+import com.wavelinkllc.chiime.HomeActivity;
 import com.wavelinkllc.chiime.R;
-import com.wavelinkllc.chiime.SquareVideoView;
-
-import java.net.URI;
+import com.wavelinkllc.chiime.SquareImageView;
+import com.wavelinkllc.chiime.VideoActivity;
 
 public class VideoPost extends Post {
 
-    private SquareVideoView video;
+    public final static String VIDEO_PATH = "com.wavelinkllc.chiime.VIDEO_PATH";
+
+    private SquareImageView image;
 
     public VideoPost(View convertView)
     {
         super(convertView);
-        video = (SquareVideoView)view.findViewById(R.id.video);
+        image = (SquareImageView)view.findViewById(R.id.image);
     }
 
     @Override
-    public void render(PostItem postItem)
+    public void render(final PostItem postItem)
     {
         super.render(postItem);
-        video.stopPlayback();
-        MediaController mediaController = new MediaController(this.view.getContext());
-        mediaController.setAnchorView(video);
-        video.setMediaController(mediaController);
-        video.setVideoURI(Uri.parse("http://www.chiime.co" + postItem.video));
-        video.requestFocus();
-        video.start();
+        Ion.with(image)
+                .placeholder(R.drawable.load)
+                .load("http://www.chiime.co" + postItem.image);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), VideoActivity.class);
+                intent.putExtra(VIDEO_PATH, postItem.video);
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
 }

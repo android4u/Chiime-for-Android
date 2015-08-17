@@ -12,7 +12,7 @@ import com.wavelinkllc.chiime.R;
 
 public class Post {
 
-    public final View view;
+    public View view;
     public Object tag = null;
 
     protected ImageView profilePicture = null;
